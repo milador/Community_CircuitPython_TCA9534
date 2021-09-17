@@ -43,8 +43,6 @@ Installing from PyPI
 .. note:: This library is not available on PyPI yet. Install documentation is included
    as a standard element. Stay tuned for PyPI availability!
 
-.. todo:: Remove the above note if PyPI version is/will be available at time of release.
-
 On supported GNU/Linux systems like the Raspberry Pi, you can install the driver locally `from
 PyPI <https://pypi.org/project/Community-circuitpython-tca9534/>`_.
 To install for current user:
@@ -96,8 +94,32 @@ Or the following command to update an existing version:
 Usage Example
 =============
 
-.. todo:: Add a quick, simple example. It and other examples should live in the
-examples folder and be included in docs/examples.rst.
+.. code-block:: shell
+
+    #Blinking LED Code example 
+    
+    # Create I2C bus.
+    i2c = busio.I2C(board.SCL, board.SDA)
+
+    # Create bus-expander instance.
+    tca9534 = community_tca9534.TCA9534(i2c)
+
+    # Set GPIO three configuration (OUTPUT)
+    gpio_three_mode = tca9534.set_gpio_mode(3,0)
+
+    # Main loop blinks and prints the GPIO three status every second:
+    while True:
+        gpio_three_status = tca9534.set_gpio(3,0)
+        print("GPIO three status: LOW")
+        # Delay for one second.
+        time.sleep(1.0)
+        gpio_three_status = tca9534.set_gpio(3,1)
+        print("GPIO three status: HIGH")
+        # Delay for one second.
+        time.sleep(1.0)
+    
+
+More examples are available in the examples directory. 
 
 Contributing
 ============
