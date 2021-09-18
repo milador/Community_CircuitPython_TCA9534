@@ -96,30 +96,31 @@ Usage Example
 
 .. code-block:: shell
 
-    #Blinking LED Code example 
-    
-    # Create I2C bus.
-    i2c = busio.I2C(board.SCL, board.SDA)
+    #Demo of reading GPIO's status in TCA9534 bus-expander
 
-    # Create bus-expander instance.
-    tca9534 = community_tca9534.TCA9534(i2c)
+	from adafruit_bus_device.i2c_device import I2CDevice
+	import board
+	import busio
+	import time
+	import community_tca9534
 
-    # Set GPIO three configuration (OUTPUT)
-    gpio_three_mode = tca9534.set_gpio_mode(3,0)
+	# Create I2C bus.
+	i2c = busio.I2C(board.SCL, board.SDA)
 
-    # Main loop blinks and prints the GPIO three status every second:
-    while True:
-        gpio_three_status = tca9534.set_gpio(3,0)
-        print("GPIO three status: LOW")
-        # Delay for one second.
-        time.sleep(1.0)
-        gpio_three_status = tca9534.set_gpio(3,1)
-        print("GPIO three status: HIGH")
-        # Delay for one second.
-        time.sleep(1.0)
-    
+	# Create bus-expander instance.
+	tca9534 = community_tca9534.TCA9534(i2c)
 
-More examples are available in the examples directory. 
+
+	# Main loop prints the GPIO zero status every half a second:
+	while True:
+		gpio_zero_status = tca9534.get_gpio(0)
+		print("GPIO zero status: {0}".format(gpio_zero_status))
+		# Delay for half a second.
+		time.sleep(0.5)
+
+
+
+More examples are available in the examples directory.
 
 Contributing
 ============

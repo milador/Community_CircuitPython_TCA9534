@@ -1,11 +1,13 @@
 # SPDX-FileCopyrightText: 2017 Scott Shawcroft, written for Adafruit Industries
 # SPDX-FileCopyrightText: Copyright (c) 2021 Milad Hajihassan for Milador
 # Demo of reading GPIO's status in TCA9534 bus-expander
+#
+# SPDX-License-Identifier: MIT
 
 from adafruit_bus_device.i2c_device import I2CDevice
 import board
 import busio
-import time 
+import time
 import community_tca9534
 
 # Create I2C bus.
