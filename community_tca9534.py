@@ -132,7 +132,7 @@ class TCA9534:
     def get_gpio_mode(self, gpio_position):
         """Get a gpio mode"""
         port_configuration = self.read_register(TCA9534_REGISTER_CONFIGURATION)
-        return True if (port_configuration & (1 << gpio_position) != 0) else False
+        return bool(port_configuration & (1 << gpio_position) != 0)
 
     ################################################################################
     #  set_gpio_mode(self, gpio_position, gpio_mode)
@@ -165,7 +165,7 @@ class TCA9534:
         port_mode_status = self.read_register(TCA9534_REGISTER_CONFIGURATION)
         for gpio_position in range(8):
             gpio_mode_status = (
-                True if (port_mode_status & (1 << gpio_position) != 0) else False
+                bool(port_mode_status & (1 << gpio_position) != 0)
             )
             port_mode_array.append(gpio_mode_status)
         return port_mode_array
@@ -197,7 +197,7 @@ class TCA9534:
         """Get gpio inversion polarity"""
         port_inversion = self.read_register(TCA9534_REGISTER_INVERSION)
         gpio_inversion_status = (
-            True if (port_inversion & (1 << gpio_position) != 0) else False
+            bool(port_inversion & (1 << gpio_position) != 0)
         )
         return gpio_inversion_status
 
@@ -232,7 +232,7 @@ class TCA9534:
         port_inversion_status = self.read_register(TCA9534_REGISTER_INVERSION)
         for gpio_position in range(8):
             gpio_inversion_status = (
-                True if (port_inversion_status & (1 << gpio_position) != 0) else False
+                bool(port_inversion_status & (1 << gpio_position) != 0)
             )
             port_inversion_array.append(gpio_inversion_status)
         return port_inversion_array
@@ -263,7 +263,7 @@ class TCA9534:
     def get_gpio(self, gpio_position):
         """Get gpio status by gpio position"""
         port_in_status = self.read_register(TCA9534_REGISTER_INPUT_PORT)
-        gpio_in_status = True if (port_in_status & (1 << gpio_position) != 0) else False
+        gpio_in_status = bool(port_in_status & (1 << gpio_position) != 0)
         return gpio_in_status
 
     ################################################################################
@@ -298,7 +298,7 @@ class TCA9534:
         port_in_status = self.read_register(TCA9534_REGISTER_INPUT_PORT)
         for gpio_position in range(8):
             gpio_in_status = (
-                True if (port_in_status & (1 << gpio_position) != 0) else False
+                bool(port_in_status & (1 << gpio_position) != 0)
             )
             port_in_array.append(gpio_in_status)
         return port_in_array
